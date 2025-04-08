@@ -1,0 +1,35 @@
+extends common/layout
+
+block content
+  .container
+    h1.text-center.mb-4 Skills
+
+    form(action="/addskill" method="POST").mb-4
+      .row
+        .col-md-4
+          input.form-control(type="text" name="name" placeholder="Skill Name" required)
+        .col-md-4
+          select.form-select(name="level" required)
+            option(value="Beginner") Beginner
+            option(value="Intermediate") Intermediate
+            option(value="Advanced") Advanced
+        .col-md-4
+          select.form-select(name="category" required)
+            option(value="Frontend") Frontend
+            option(value="Backend") Backend
+            option(value="Design") Design
+      .mt-3
+        button.btn.btn-primary(type="submit") Add Skill
+
+    h2.mt-5 Existing Skills
+    .row
+      each skill in skills
+        .col-md-4.mb-3
+          .card.shadow-sm
+            .card-body
+              h4.card-title= skill.name
+              p Level: #{skill.level}
+              p Category: #{skill.category}
+              form(action="/deleteskill" method="POST").mt-2
+                input(type="hidden" name="name" value=skill.name)
+                button.btn.btn-danger(type="submit") Delete

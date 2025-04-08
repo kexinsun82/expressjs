@@ -1,0 +1,40 @@
+body {
+  font-family: "Noto Serif";
+}
+
+.navbar {
+  background-color: #D6CB1F !important; 
+  font-family: "Noto Serif";
+}
+
+p {
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn-primary {
+  background-color: #D6CB1F;
+  color: black;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #4649A8;
+}
+
+.btn-danger {
+  background-color: #B28135;
+  border: none;
+}
+
+.card {
+  border-radius: 12px;
+  box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.1);
+}
+
+.footer {
+  background-color: #B28135; 
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  bottom: 0;
+}
