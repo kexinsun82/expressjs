@@ -90,6 +90,16 @@ app.post('/api/updateprojectstatus', async (req, res) => {
   }
 });
 
+app.post("/api/updateprojectorder", async (req, res) => {
+  try {
+    const { name, newOrder } = req.body; 
+    await ProjectDB.updateProjectOrder(name, parseInt(newOrder));
+    res.json({ message: "Project order updated successfully" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Index
 app.get("/", async (req, res) => {
   let projectList = await ProjectDB.getProjects();

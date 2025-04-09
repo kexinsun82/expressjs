@@ -8,7 +8,8 @@ const ProjectSchema = new mongoose.Schema({
   tech: [String],
   year: Number,
   status: String,
-  url: String
+  url: String,
+  order: { type: Number, default: 0 }
 });
 const Project = mongoose.model("Project", ProjectSchema);
 
@@ -46,7 +47,8 @@ async function initializeProjects() {
 
 async function getProjects() {
   await connect();
-  return await Project.find({});
+  const projects = await Project.find().sort({ order: 1 });
+  return projects;
 }
 
 async function addProject(name, description, tech, year, status, url) {
@@ -68,10 +70,24 @@ async function deleteProjectsByName(name) {
   let result = await Project.deleteMany({ name: name });
 }
 
+async function updateProjectOrder(name, newOrder) {
+  await connect();
+  await Project.updateOne(
+    { name: name },
+    { $set: { order: newOrder } }
+  );
+}
+
+app.get("/projects", async (req, res) => {
+  let projectList = await ProjectDB.getProjects(); 
+  res.render("projects", { projects: projectList });
+});
+
 module.exports = { 
   getProjects,
   initializeProjects,
   addProject,
   updateProjectStatus,
-  deleteProjectsByName
+  deleteProjectsByName,
+  updateProjectOrder
 };

@@ -1,12 +1,12 @@
 {
-  "name": "testapp-b",
+  "name": "testapp",
   "version": "1.0.0",
-  "description": "My first Express app",
+  "description": "My portfolio Express API",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./index.js"
   },
-  "author": "Joanna K",
+  "author": "Kelly Sun",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
