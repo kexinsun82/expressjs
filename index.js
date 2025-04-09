@@ -90,6 +90,12 @@ app.post('/api/updateprojectstatus', async (req, res) => {
   }
 });
 
+app.get("/", async (req, res) => {
+  let projectList = await ProjectDB.getProjects();
+  let skillList = await SkillDB.getSkills();
+  res.render("index", { projects: projectList, skills: skillList });
+});
+
 app.listen(port, "0.0.0.0", () => {
   console.log(`Server running on http://localhost:${port}`);
 });
