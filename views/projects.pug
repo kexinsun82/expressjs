@@ -4,7 +4,7 @@ block content
   .container
     h1.text-center.mb-4 Projects
 
-    form(action="/api/addproject" method="POST").mb-4
+    form(action="/addproject" method="POST").mb-4
       .row
         .col-md-4
           input.form-control(type="text" name="name" placeholder="Project Name" required)
@@ -36,7 +36,7 @@ block content
               p Tech: #{project.tech.join(", ")}
               p Year: #{project.year}
               p Status: #{project.status}
-              form(action="/api/updateprojectstatus" method="POST" class="mb-2")
+              form(action="/updateprojectstatus" method="POST" class="mb-2")
                 input(type="hidden" name="name" value=project.name)
                 select.form-select(name="newStatus" onchange="this.form.submit()")
                   option(value="In Progress" selected=project.status === "In Progress") In Progress
@@ -44,6 +44,6 @@ block content
                   option(value="Maintained" selected=project.status === "Maintained") Maintained
               if project.url
                 a.btn.btn-primary(href=project.url target="_blank") GitHub Repo
-              form(action="/api/deleteproject" method="POST").mt-2
+              form(action="/deleteproject" method="POST").mt-2
                 input(type="hidden" name="name" value=project.name)
                 button.btn.btn-danger(type="submit") Delete

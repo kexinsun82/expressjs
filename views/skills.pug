@@ -4,7 +4,7 @@ block content
   .container
     h1.text-center.mb-4 Skills
 
-    form(action="/api/addskill" method="POST").mb-4
+    form(action="/addskill" method="POST").mb-4
       .row
         .col-md-4
           input.form-control(type="text" name="name" placeholder="Skill Name" required)
@@ -30,6 +30,6 @@ block content
               h4.card-title= skill.name
               p Level: #{skill.level}
               p Category: #{skill.category}
-              form(action="/api/deleteskill" method="POST").mt-2
+              form(action="/deleteskill" method="POST").mt-2
                 input(type="hidden" name="name" value=skill.name)
                 button.btn.btn-danger(type="submit") Delete
