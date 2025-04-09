@@ -78,11 +78,6 @@ async function updateProjectOrder(name, newOrder) {
   );
 }
 
-app.get("/projects", async (req, res) => {
-  let projectList = await ProjectDB.getProjects(); 
-  res.render("projects", { projects: projectList });
-});
-
 module.exports = { 
   getProjects,
   initializeProjects,
