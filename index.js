@@ -80,6 +80,17 @@ app.delete("/api/skills/:name", async (req, res) => {
   }
 });
 
+
+app.post('/api/updateprojectstatus', async (req, res) => {
+  try {
+    const { name, newStatus } = req.body;
+    await ProjectDB.updateProjectStatus(name, newStatus);
+    res.redirect('/projects'); 
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Index
 app.get("/", async (req, res) => {
   let projectList = await ProjectDB.getProjects();
@@ -99,6 +110,10 @@ app.post("/addproject", async (req, res) => {
 });
 app.post("/deleteproject", async (req, res) => {
   await ProjectDB.deleteProjectsByName(req.body.name);
+  res.redirect("/projects");
+});
+app.post("/updateprojectstatus", async (req, res) => {
+  await ProjectDB.updateProjectStatus(req.body.name, req.body.newStatus);
   res.redirect("/projects");
 });
 
