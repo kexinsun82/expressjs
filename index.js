@@ -33,7 +33,7 @@ app.get("/api/projects", async (req, res) => {
   }
 });
 
-app.post("/api/projects", async (req, res) => {
+app.post("/api/addproject", async (req, res) => {
   try {
     const { name, description, tech, year, status, url } = req.body;
     await ProjectDB.addProject(name, description, tech.split(","), parseInt(year), status, url);
@@ -80,7 +80,6 @@ app.delete("/api/skills/:name", async (req, res) => {
   }
 });
 
-
 app.post('/api/updateprojectstatus', async (req, res) => {
   try {
     const { name, newStatus } = req.body;
@@ -91,47 +90,6 @@ app.post('/api/updateprojectstatus', async (req, res) => {
   }
 });
 
-// Index
-app.get("/", async (req, res) => {
-  let projectList = await ProjectDB.getProjects();
-  let skillList = await SkillDB.getSkills();
-  res.render("index", { projects: projectList, skills: skillList });
-});
-
-// Projects Page
-app.get("/projects", async (req, res) => {
-  let projectList = await ProjectDB.getProjects();
-  res.render("projects", { projects: projectList });
-});
-app.post("/addproject", async (req, res) => {
-  const { name, description, tech, year, status, url } = req.body;
-  await ProjectDB.addProject(name, description, tech.split(","), parseInt(year), status, url);
-  res.redirect("/projects");
-});
-app.post("/deleteproject", async (req, res) => {
-  await ProjectDB.deleteProjectsByName(req.body.name);
-  res.redirect("/projects");
-});
-app.post("/updateprojectstatus", async (req, res) => {
-  await ProjectDB.updateProjectStatus(req.body.name, req.body.newStatus);
-  res.redirect("/projects");
-});
-
-// Skills Page
-app.get("/skills", async (req, res) => {
-  let skillList = await SkillDB.getSkills();
-  res.render("skills", { skills: skillList });
-});
-app.post("/addskill", async (req, res) => {
-  const { name, level, category } = req.body;
-  await SkillDB.addSkill(name, level, category);
-  res.redirect("/skills");
-});
-app.post("/deleteskill", async (req, res) => {
-  await SkillDB.deleteSkillsByName(req.body.name);
-  res.redirect("/skills");
-});
-
-app.listen(port, () => {
+app.listen(port, "0.0.0.0", () => {
   console.log(`Server running on http://localhost:${port}`);
 });
