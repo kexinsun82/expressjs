@@ -36,7 +36,7 @@ block content
               p Tech: #{project.tech.join(", ")}
               p Year: #{project.year}
               p Status: #{project.status}
-              form(action="api/updateprojectstatus" method="POST" class="mb-2")
+              form(action="/api/updateprojectstatus" method="POST" class="mb-2")
                 input(type="hidden" name="name" value=project.name)
                 select.form-select(name="newStatus" onchange="this.form.submit()")
                   option(value="In Progress" selected=project.status === "In Progress") In Progress
