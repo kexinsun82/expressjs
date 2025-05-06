@@ -21,6 +21,17 @@ app.set("view engine", "pug");
 
 app.use(express.static(path.join(__dirname, "public")));
 
+//set up app to use sessions
+// app.use(
+//   sessions({
+//     secret: process.env.SESSIONSECRET,
+//     name: "MyUniqueSessID",
+//     saveUninitialized: false,
+//     resave: false,
+//     cookie: {}
+//   })
+// );
+
 ProjectDB.initializeProjects();
 SkillDB.initializeSkills();
 
@@ -141,9 +152,14 @@ app.post("/deleteskill", async (req, res) => {
   res.redirect("/skills");
 });
 
-// app.listen(port, () => {
-//   console.log(`Server running on http://localhost:${port}`);
-// });
+// /user
+// app.get("/", async (request, response) => {
+//   if (request.session.loggedIn) {
+//   response.render("user/user", { username: request.session.user });
+//   } else {
+//   response.redirect("/user/login");
+//   }
+//   });
 
 app.listen(port, "0.0.0.0", () => {
   console.log(`Server running on http://localhost:${port}`);

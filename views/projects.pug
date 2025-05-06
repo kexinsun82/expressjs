@@ -22,6 +22,9 @@ block content
             option(value="Maintained") Maintained
         .col-md-4
           input.form-control(type="text" name="url" placeholder="GitHub Repository URL")
+      .row.mt-2
+        .col-md-4
+          input.form-control(type="text" name="imageUrl" placeholder="Image URL")
       .mt-3
         button.btn.btn-primary(type="submit") Add Project
 
@@ -30,6 +33,8 @@ block content
       each project in projects
         .col-md-4.mb-3
           .card.shadow-sm
+            if project.imageUrl
+              img.card-img-top(src=project.imageUrl alt=project.name)
             .card-body
               h4.card-title= project.name
               p.card-text= project.description

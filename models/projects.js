@@ -9,7 +9,8 @@ const ProjectSchema = new mongoose.Schema({
   year: Number,
   status: String,
   url: String,
-  order: { type: Number, default: 0 }
+  order: { type: Number, default: 0 },
+  imageUrl: String 
 });
 const Project = mongoose.model("Project", ProjectSchema);
 
@@ -29,7 +30,8 @@ async function initializeProjects() {
         tech: ["JavaScript", "React", "Node.js"],
         year: 2025,
         status: "Completed",
-        url: "https://kexinsun82.github.io/javascript-focus-typing/"
+        url: "https://kexinsun82.github.io/javascript-focus-typing/",
+        imageUrl: "https://i.postimg.cc/Vv5yZmTq/project2.png" 
       },
       {
         name: "Portfolio Website",
@@ -37,7 +39,8 @@ async function initializeProjects() {
         tech: ["HTML", "CSS", "JavaScript", "Express"],
         year: 2025,
         status: "In Progress",
-        url: "https://www.kellysun.ca/"
+        url: "https://www.kellysun.ca/",
+        imageUrl: "https://i.postimg.cc/hPkFMF0m/project6.png" 
       }
     ];
     await Project.insertMany(projectList);
@@ -51,9 +54,9 @@ async function getProjects() {
   return projects;
 }
 
-async function addProject(name, description, tech, year, status, url) {
+async function addProject(name, description, tech, year, status, url, imageUrl) {
   await connect();
-  let newProject = new Project({ name, description, tech, year, status, url });
+  let newProject = new Project({ name, description, tech, year, status, url, imageUrl });
   await newProject.save();
 }
 
